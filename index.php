@@ -4,9 +4,8 @@
     require_once 'vendor/function.php';
     $route = $_GET['route'];
     //РОУТ КОТОРЫЙ ПРОПИСАН в .htacccess
-    /*var_dump($route);*/
 
-
+$route = (explodeURL($route));
 
 
     //main - главная
@@ -15,11 +14,13 @@
 
 
 switch ($route) {
-    case null:
+    case ($route[0] === ''):
         require_once 'templates/main.php';
         break;
-    case 1:
-        echo "i равно 1";
+    case ($route[0]== 'article' && isset($route[1])):
+        $url = $route[1];
+        $result = getArticle($url);
+        require_once 'templates/article.php';
         break;
     case 2:
         echo "i равно 2";
